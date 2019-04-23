@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var BenhNhanController = require('../controllers/BenhNhanController')
+var PhieuKhamBenhController = require('../controllers/PhieuKhamBenhController')
 var db = require('../models/dbconnection');
 var bodyParser = require('body-parser').urlencoded({ extended: true });
 /* GET home page. */
@@ -30,13 +31,21 @@ router.get('/benhnhan/sua/:MaBN',async function (req, res, next) {
   var MaBN = req.params.MaBN;
   var BenhNhan = await BenhNhanController.getSuaBenhNhan(MaBN);
   res.render('benhnhan/sua', { BenhNhan });
-  // res.send(BenhNhan);
 });
 
 router.post('/benhnhan/sua/:MaBN', bodyParser,async function (req, res, next) {
-  var log = await BenhNhanController.themBenhNhan(req, res);
-  // const { hoten, gioitinh, namsinh, diachi } = req.body;
-  // var benhnhan = { hoten, gioitinh, namsinh, diachi };
-  res.send(log);
+  await BenhNhanController.postSuaBenhNhan(req, res);
+});
+
+//Xoa Benh Nhan
+router.get('/benhnhan/xoa/:MaBN',async function (req, res, next) {
+  await BenhNhanController.getXoaBenhNhan(req, res);
+  // res.send('Da Xoa');
+});
+
+router.get('/phieukham', async function (req, res, next) {
+  var PhieuKhamBenh = await PhieuKhamBenhController.getPhieuKhamBenh()
+  // res.send(PhieuKhamBenh);
+  res.render('phieukhambenh/danhsach', { PhieuKhamBenh: await PhieuKhamBenhController.getPhieuKhamBenh()});
 });
 module.exports = router;

@@ -1,0 +1,100 @@
+<% layout('../layout/index') -%>
+<title>Danh sách phiếu khám bệnh - Quản lý phòng mạch tư</title>
+<% stylesheet('assets/plugins/datatables/jquery.dataTables.min.css') -%>
+<% stylesheet('assets/plugins/datatables/buttons.bootstrap.min.css') -%>
+<% stylesheet('assets/plugins/datatables/fixedHeader.bootstrap.min.css') -%>
+<% stylesheet('assets/plugins/datatables/responsive.bootstrap.min.css') -%>
+<% stylesheet('assets/plugins/datatables/scroller.bootstrap.min.css') -%>
+<% stylesheet('assets/plugins/datatables/dataTables.colVis.css') -%>
+<% stylesheet('assets/plugins/datatables/dataTables.bootstrap.min.css') -%>
+<% stylesheet('assets/plugins/datatables/fixedColumns.dataTables.min.css') -%>
+<% stylesheet('assets/plugins/select2/css/select2.min.css') -%>
+<% stylesheet('assets/plugins/bootstrap-select/css/bootstrap-select.min.css') -%>
+<% stylesheet('assets/css/cssdate.css') -%>
+
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li>
+                <a href=""><i class="ti-home"></i></a>
+            </li>
+            <li class="active">
+                Danh sách phiếu khám bệnh
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <a href="">
+                <button class="ladda-button btn btn-default waves-effect waves-light" data-style="expand-right">
+                    <span class="btn-label"><i class="fa fa-plus"></i></span>Thêm phiếu khám bệnh
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card-box table-responsive">
+            <h4 class="m-t-0 header-title"><b>Danh sách phiếu khám bệnh</b></h4>
+            <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap"
+                cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Ngày khám</th>
+                        <th>Bệnh nhân</th>
+                        <th>Triệu chứng</th>
+                        <th>Loại bệnh</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% PhieuKhamBenh.forEach((item, index) => { %>
+                    <% const {MaPKB, NgayKham, MaBN, TrieuChung, MaLoaiBenh} = item %>
+                    <tr>
+                        <td><%= index+1 %></td>
+                        <td><%= NgayKham %></td>
+                        <td title="Click vào bệnh nhân để sửa">
+                            <a target="_blank" href=""><%= MaBN %></a>
+                        </td>
+                        <td><%= TrieuChung %></td>
+                        <td><%= MaLoaiBenh %></td>
+                        <td>
+                            <a href="" target="_blank" class="btn btn-icon waves-effect waves-light btn-success"
+                                title="Chi tiết đơn thuốc">
+                                Đơn thuốc
+                            </a> &nbsp;&nbsp;
+
+                            <a href="" target="_blank" class="btn btn-icon waves-effect waves-light btn-inverse"
+                                title="Hóa đơn thanh toán">
+                                Hóa đơn
+                            </a> &nbsp;&nbsp;
+
+                            <a href="" class="btn btn-icon waves-effect waves-light btn-warning" title="Sửa">
+                                <i class="fa fa-wrench"></i></a>
+                            &nbsp;
+                            &nbsp;
+                            <a onclick="" class="btn btn-icon waves-effect waves-light btn-danger" title="Xóa">
+                                <i class="fa fa-remove"></i></a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<% script('assets/plugins/datatables/dataTables.buttons.min.js') -%>
+<% script('assets/plugins/datatables/buttons.bootstrap.min.js') -%>
+<% script('assets/plugins/datatables/jszip.min.js') -%>
+<% script('assets/plugins/datatables/vfs_fonts.js') -%>
+<% script('assets/plugins/datatables/buttons.html5.min.js') -%>
+<% script('assets/plugins/datatables/dataTables.responsive.min.js') -%>
+<% script('assets/plugins/datatables/responsive.bootstrap.min.js') -%>

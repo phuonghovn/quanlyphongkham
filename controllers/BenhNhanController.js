@@ -42,16 +42,28 @@ var BenhNhanController = {
             });
         })
     },
-    getXoaBenhNhan: function (req, res) {
+    postSuaBenhNhan: function (req, res) {
         return new Promise((resolve, reject) => {
-            var query = `INSERT INTO benhnhan (HoTen, NamSinh, GioiTinh, DiaChi) VALUES (${mysql.escape(req.body.hoten)}, ${mysql.escape(req.body.namsinh)}, ${mysql.escape(req.body.gioitinh)}, ${mysql.escape(req.body.diachi)})`;
+            var query = `UPDATE benhnhan SET 
+            HoTen = ${mysql.escape(req.body.hoten)}, NamSinh = ${mysql.escape(req.body.namsinh)}, GioiTinh = ${mysql.escape(req.body.gioitinh)}, DiaChi = ${mysql.escape(req.body.diachi)}
+             WHERE MaBN = ${mysql.escape(req.params.MaBN)}`;
             var BenhNhan = db.query(query, function (error, results) {
                 //if error, print blank results
                 if (error) {
                     
                 }
-                // console.log(results);
-                // res.render('benhnhan/danhsach', { BenhNhan: results })
+                res.redirect('/benhnhan');
+            });
+        })
+    },
+    getXoaBenhNhan: function (req, res) {
+        return new Promise((resolve, reject) => {
+            var query = `DELETE FROM benhnhan WHERE MaBN = ${mysql.escape(req.params.MaBN)}`;
+            var BenhNhan = db.query(query, function (error, results) {
+                //if error, print blank results
+                if (error) {
+                    
+                }
                 res.redirect('/benhnhan');
             });
         })

@@ -11,17 +11,6 @@
         </ol>
     </div>
 </div>
-
-<!-- @if (count($errors) > 0 || session('error')) -->
-<!-- <div class="alert alert-danger" role="alert">
-                        <strong>Cảnh báo!</strong><br> -->
-<!-- @foreach($errors->all() as $err) -->
-<!-- {{$err}} -->
-<!-- <br /> -->
-<!-- @endforeach
-                            {{session('error')}} -->
-<!-- </div> -->
-<!-- @endif -->
 @if (session('success'))
 <div class="alert alert-success">
     <strong>Thành công!</strong>
@@ -83,7 +72,7 @@
                                     class="fa fa-wrench"></i></a>
                             &nbsp;
                             &nbsp;
-                            <a onclick="" class="btn btn-icon waves-effect waves-light btn-danger" title="Xóa"> <i
+                            <a onclick="del(<%= MaBN%>)" class="btn btn-icon waves-effect waves-light btn-danger" title="Xóa"> <i
                                     class="fa fa-remove"></i></a>
                         </td>
                     </tr>
@@ -93,3 +82,23 @@
         </div>
     </div>
 </div>
+<script>
+        function del(id) {
+            $.confirm({
+                text: "Hành động này sẽ xóa dữ liệu của bệnh nhân này. Bạn có chắc muốn xóa không?",
+                title: "Xác nhận xóa",
+                confirmButton: "Có, hãy xóa",
+                cancelButton: "Không, đừng xóa",
+                post: false,
+                submitForm: false,
+                confirmButtonClass: "btn-danger",
+                cancelButtonClass: "btn-default",
+                dialogClass: "modal-dialog",
+                confirm: function (button) {
+                    location.assign("xoa/" + id);
+                },
+                cancel: function (button) {
+                }
+            });
+        }
+    </script>
