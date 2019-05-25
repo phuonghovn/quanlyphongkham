@@ -26,6 +26,13 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/benhnhan', express.static(path.join(__dirname, 'public')));
+app.use('/benhnhan/sua', express.static(path.join(__dirname, 'public')));
+app.use('/loaibenh/sua', express.static(path.join(__dirname, 'public')));
+app.use('/donvi/sua', express.static(path.join(__dirname, 'public')));
+app.use('/cachdung/sua', express.static(path.join(__dirname, 'public')));
+app.use('/thuoc', express.static(path.join(__dirname, 'public')));
+app.use('/thuoc/sua', express.static(path.join(__dirname, 'public')));
+app.use('/phieukhambenh', express.static(path.join(__dirname, 'public')));
 
 
 

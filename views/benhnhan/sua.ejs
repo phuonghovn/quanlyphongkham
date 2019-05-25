@@ -13,7 +13,7 @@
                 <a href=""><i class="ti-home"></i></a>
             </li>
             <li>
-                <a href="{{route('ds-benhnhan.get')}}">Danh sách bệnh nhân</a>
+                <a href="/benhnhan">Danh sách bệnh nhân</a>
             </li>
             <li class="active">
                 Sửa bệnh nhân <%= HoTen%>
@@ -53,7 +53,6 @@
                 <div class="col-md-6">
                     <div class="p-l-r-10">
                         <form class="form-horizontal" role="form" action="" method="post">
-                            {{csrf_field()}}
 
                             <div class="form-group">
                                 <label class="control-label">Họ & tên</label>

@@ -83,12 +83,12 @@
                                 <select class="selectpicker" data-style="btn-default btn-custom" id="loaibenh"
                                         name="loaibenh">
                                     <option value="">--- Chọn loại bệnh ---</option>
-                                    <!-- @foreach($dsLoaiBenh as $detail)
-                                        <option value="{{ $detail->MaLoaiBenh }}"
-                                                @if (old('loaibenh') == $detail->MaLoaiBenh) selected @endif>
-                                            {{ $detail->TenLoaiBenh }}
+                                    <% LoaiBenh.forEach((item, index) => {%>
+                                        <% const { MaLoaiBenh, TenLoaiBenh } = item%>
+                                        <option value="<%= MaLoaiBenh%>" >
+                                            <%= TenLoaiBenh%>
                                         </option>
-                                    @endforeach -->
+                                    <% }) %>
                                 </select>
                             </div>
                         </div>

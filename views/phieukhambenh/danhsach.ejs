@@ -59,7 +59,7 @@
                     <% const {MaPKB, NgayKham, MaBN, TrieuChung, MaLoaiBenh} = item %>
                     <tr>
                         <td><%= index+1 %></td>
-                        <td><%= NgayKham %></td>
+                        <td><%= NgayKham.toLocaleDateString() %></td>
                         <td title="Click vào bệnh nhân để sửa">
                             <a target="_blank" href=""><%= MaBN %></a>
                         </td>

@@ -1,0 +1,124 @@
+<% layout('../layout/index') -%>
+<% const { MaThuoc, TenThuoc, SoLuongConLai, MaDonVi, DonGia, MaCachDung } = Thuoc[0] %>
+    <title>Sửa thuốc <%= TenThuoc%> - Quản lý phòng mạch tư</title>
+
+    <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet"/>
+    <link href="assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet"/>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <ol class="breadcrumb">
+                <li>
+                    <a href=""><i class="ti-home"></i></a>
+                </li>
+                <li>
+                    <a href="/thuoc">Danh sách thuốc</a>
+                </li>
+                <li class="active">
+                    Sửa thuốc <%= TenThuoc%>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- @if (count($errors) > 0 || session('error'))
+        <div class="alert alert-danger" role="alert">
+            <strong>Cảnh báo!</strong><br>
+            @foreach($errors->all() as $err)
+                {{$err}}<br/>
+            @endforeach
+            {{session('error')}}
+        </div>
+    @endif
+    @if (session('success'))
+        <div class="alert alert-success">
+            <strong>Thành công!</strong>
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <br/>
+            {{session('success')}}
+        </div>
+    @endif -->
+
+    <!--end duong dan nho-->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card-box">
+                <h4 class="m-t-0 header-title"><b>Sửa thuốc <%= TenThuoc%></b></h4>
+                <p class="text-muted m-b-10 font-13">
+                    <b>Bắt buộc</b> <code>Tên thuốc</code> <code>Đơn giá</code> <code>Đơn vị</code> <code>Cách
+                        dùng</code>
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="p-l-r-10">
+                            <form class="form-horizontal" role="form" action=""
+                                  method="post">
+
+                                <div class="form-group">
+                                    <label class="control-label">Tên thuốc</label>
+                                    <input name="tenthuoc" type="text" class="form-control" value="<%= TenThuoc%>"
+                                           placeholder="Nhập tên thuốc..." required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Số lượng thuốc còn lại</label>
+                                    <input name="soluongnhap" type="number" class="form-control" value="<%= SoLuongConLai%>"
+                                           placeholder="Nhập số lượng thuốc còn lại..." required readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Đơn giá (VND)</label>
+                                    <input name="dongia" type="number" class="form-control" value="<%= DonGia%>"
+                                           placeholder="Nhập đơn giá..." required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Đơn vị</label>
+                                    <select class="selectpicker" data-style="btn-default btn-custom" id="donvi"
+                                            name="donvi">
+                                        <option value="" selected>--- Chọn đơn vị ---</option>
+                                        <% DonVi.forEach((item, index) => {%>
+                                            <% const { MaDonVi, TenDonVi } = item%>
+                                            <option value="<%= item.MaDonVi%>" 
+                                                    <% if(Thuoc[0].MaDonVi == item.MaDonVi){ %> 
+                                                        selected
+                                                    <% } %>
+                                            >
+                                            <%= item.TenDonVi%>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Cách dùng</label>
+                                    <select class="selectpicker" data-style="btn-default btn-custom" id="cachdung"
+                                            name="cachdung">
+                                        <option value="">--- Chọn cách dùng ---</option>
+                                        <% CachDung.forEach((item, index) => {%>
+                                            <% const { MaCachDung, CachDung } = item%>
+                                            <option value="<%= item.MaCachDung%>" 
+                                                <% if(Thuoc[0].MaCachDung == item.MaCachDung){ %> 
+                                                    selected
+                                                <% } %>
+                                            >
+                                                <%= item.CachDung%>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="ladda-button btn btn-default" data-style="expand-right">Lưu lại
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/plugins/switchery/js/switchery.min.js"></script>
