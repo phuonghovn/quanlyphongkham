@@ -3,7 +3,7 @@
 
 <link href="assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
-<link href="assets/css/cssdate.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/cssdate.css" rel="stylesheet" type="text/css" />
 <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -136,14 +136,14 @@
     </div>
 
     <div class="row">
-            <div class="col-sm-12">
-                <div class="card-box table-responsive">
-                    <h4 class="m-t-0 header-title"><b>Kê đơn thuốc</b></h4>
+        <div class="col-sm-12">
+            <div class="card-box table-responsive">
+                <h4 class="m-t-0 header-title"><b>Kê đơn thuốc</b></h4>
 
-                    <div class="p-10">
-                        <table id="datatable-responsive" class="table table-striped table-bordered m-0" cellspacing="0"
-                               width="100%">
-                            <thead>
+                <div class="p-10">
+                    <table id="datatable-responsive" class="table table-striped table-bordered m-0" cellspacing="0"
+                        width="100%">
+                        <thead>
                             <tr>
                                 <th class="text-center">STT</th>
                                 <th class="text-center">Thuốc</th>
@@ -152,42 +152,40 @@
                                 <th class="text-center">Đơn vị</th>
                                 <th class="text-center">Cách dùng</th>
                             </tr>
-                            </thead>
-                            <tbody style="text-align: center">
-                                <% Thuoc.forEach((item, index) => {%>
-                                <% const {MaThuoc, TenThuoc, SoLuongConLai, MaDonVi, TenDonVi, DonGia, MaCachDung, CachDung} = item %>
-                                    <tr>
-                                        <td class="text-center"><%= index+1 %></td>
-                                        <td class="text-center tenthuoc"> <%= TenThuoc %> </td>
-                                        <td class="text-center slconlai">
-                                            <% if (SoLuongConLai == 0) {%>
-                                                <b style="color: red"><%= SoLuongConLai %></b>
-                                            <%} else {%>
-                                                <b style="color: green"><%= SoLuongConLai %></b>
-                                            <% } %>
-                                        </td>
-                                        <td class="text-center">
-                                            <input name="{{$detail->MaThuoc}}" type="number" class="form-control soluong"
-                                                   placeholder="Số lượng..." maxlength="4"
-                                                   value="{{old($detail->MaThuoc)}}">
-                                        </td>
-                                        <td class="text-center"><%= TenDonVi %></td>
-                                        <td class="text-center"><%= CachDung %></td>
-                                    </tr>
-                                <%})%>
-                                </tbody>
-                        </table>
-                    </div>
-
-                    <div class="p-l-r-10 p-t-10">
-                        <div class="form-group">
-                            <button class="ladda-button btn btn-default" data-style="expand-right">Lưu lại
-                            </button>
-                        </div>
-                    </div>
+                        </thead>
+                        <tbody style="text-align: center">
+                            <% Thuoc.forEach((item, index) => {%>
+                            <% const {MaThuoc, TenThuoc, SoLuongConLai, MaDonVi, TenDonVi, DonGia, MaCachDung, CachDung} = item %>
+                            <tr>
+                                <td class="text-center"><%= index+1 %></td>
+                                <td class="text-center tenthuoc" name="tenthuoc"> <%= TenThuoc %> </td>
+                                <td class="text-center slconlai">
+                                    <% if (SoLuongConLai == 0) {%>
+                                    <b style="color: red"><%= SoLuongConLai %></b>
+                                    <%} else {%>
+                                    <b style="color: green"><%= SoLuongConLai %></b>
+                                    <% } %>
+                                </td>
+                                <td class="text-center">
+                                    <input name="<%= MaThuoc %>" type="number" class="form-control soluong"
+                                        placeholder="Số lượng..." maxlength="4" value="0">
+                                </td>
+                                <td class="text-center"><%= TenDonVi %></td>
+                                <td class="text-center"><%= CachDung %></td>
+                            </tr>
+                            <%})%>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="p-l-r-10 p-t-10">
+        <div class="form-group">
+            <button class="ladda-button btn btn-default" data-style="expand-right">Lưu lại
+            </button>
+        </div>
+    </div>
 </form>
 
 <script src="assets/plugins/datatables/dataTables.buttons.min.js"></script>

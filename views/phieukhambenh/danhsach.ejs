@@ -28,7 +28,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-            <a href="">
+            <a href="/phieukhambenh/them">
                 <button class="ladda-button btn btn-default waves-effect waves-light" data-style="expand-right">
                     <span class="btn-label"><i class="fa fa-plus"></i></span>Thêm phiếu khám bệnh
                 </button>
@@ -56,15 +56,15 @@
 
                 <tbody>
                     <% PhieuKhamBenh.forEach((item, index) => { %>
-                    <% const {MaPKB, NgayKham, MaBN, TrieuChung, MaLoaiBenh} = item %>
+                    <% const {MaPKB, NgayKham, MaBN, HoTen, TrieuChung, MaLoaiBenh, TenLoaiBenh} = item %>
                     <tr>
                         <td><%= index+1 %></td>
                         <td><%= NgayKham.toLocaleDateString() %></td>
                         <td title="Click vào bệnh nhân để sửa">
-                            <a target="_blank" href=""><%= MaBN %></a>
+                            <a target="_blank" href=""><%= HoTen %></a>
                         </td>
                         <td><%= TrieuChung %></td>
-                        <td><%= MaLoaiBenh %></td>
+                        <td><%= TenLoaiBenh %></td>
                         <td>
                             <a href="" target="_blank" class="btn btn-icon waves-effect waves-light btn-success"
                                 title="Chi tiết đơn thuốc">
