@@ -1,17 +1,16 @@
 <% layout('../layout/index') -%>
 <title>Thêm phiếu khám bệnh - Quản lý phòng mạch tư</title>
 
-<link href="assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
-<link href="assets/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
-<link href="assets/css/cssdate.css" rel="stylesheet" type="text/css" />
-<link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-<link href="assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css" />
-<link href="assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css" />
+<link href="tp_ad/assets/plugins/custombox/css/custombox.css" rel="stylesheet">
+<link href="tp_ad/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+<link href="tp_ad/assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="tp_ad/assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="tp_ad/assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="tp_ad/assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="tp_ad/assets/plugins/datatables/dataTables.colVis.css" rel="stylesheet" type="text/css"/>
+<link href="tp_ad/assets/plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="tp_ad/assets/plugins/datatables/fixedColumns.dataTables.min.css" rel="stylesheet" type="text/css"/>
+<link href="tp_ad/assets/css/csscustom.css" rel="stylesheet" type="text/css"/>
 
     <div class="row">
         <div class="col-sm-12">
@@ -59,11 +58,11 @@
                         <div class="col-md-2">
                         </div>
                         <div class="col-md-4">
-
+                            <% const {NgayKham, HoTen, TrieuChung, TenLoaiBenh} = PhieuKhamBenh[0] %>
                             <div class="pull-left m-t-0">
                                 <address style="font-size: 1.25em">
-                                    <strong>Họ & tên: </strong> {{$PKB->benhnhan->HoTen}} <br>
-                                    <strong style="line-height: 2.5;">Triệu chứng: </strong> {{$PKB->TrieuChung}}<br>
+                                    <strong>Họ & tên: </strong> <%= HoTen %> <br>
+                                    <strong style="line-height: 2.5;">Triệu chứng: </strong> <%= TrieuChung %><br>
                                 </address>
                             </div>
 
@@ -73,10 +72,10 @@
                             <div class="pull-right m-t-0">
                                 <address style="font-size: 1.25em">
                                     <strong>Ngày
-                                        khám: </strong> {{date_format(date_create($PKB->NgayKham),'d/m/Y')}}
+                                        khám: </strong> <%= moment(NgayKham).format('MM/DD/YYYY') %>
                                     <br/>
                                     <strong style="line-height: 2.5;">Dự đoán loại
-                                        bệnh: </strong> {{$PKB->loaibenh->TenLoaiBenh}}<br>
+                                        bệnh: </strong> <%= TenLoaiBenh %> <br>
                                 </address>
                             </div>
                         </div>
@@ -99,18 +98,18 @@
                                     </tr>
                                     </thead>
                                     <tbody class="text-center">
-                                    <?php $i = 0; ?>
-                                    @foreach($PKB->chitietpkb as $detail)
+                                    <% ChiTietPKB.forEach((item, index) => { %>
+                                    <% const {TenThuoc, TenDonVi, SoLuong, CachDung, DonGia, ThanhTien} = item %>
                                         <tr>
-                                            <td>{{++$i}}</td>
-                                            <td>{{$detail->thuoc->TenThuoc}}</td>
-                                            <td>{{$detail->thuoc->donvi->TenDonVi}}</td>
-                                            <td>{{$detail->SoLuong}}</td>
-                                            <td>{{$detail->thuoc->cachdung->CachDung}}</td>
-                                            <td>{{number_format($detail->DonGia)}}</td>
-                                            <td>{{number_format($detail->ThanhTien)}}</td>
+                                            <td><%= index + 1 %></td>
+                                            <td><%= TenThuoc %></td>
+                                            <td><%= TenDonVi %></td>
+                                            <td><%= SoLuong %></td>
+                                            <td><%= CachDung %></td>
+                                            <td><%= DonGia %></td>
+                                            <td><%= ThanhTien %></td>
                                         </tr>
-                                    @endforeach
+                                    <% }) %>
                                     </tbody>
                                 </table>
                             </div>
@@ -119,11 +118,12 @@
                     <div class="row" style="border-radius: 0px;">
                         <div class="col-md-9"></div>
                         <div class="col-md-3 pull-right">
+                            <% const {TienKham, TienThuoc} = HoaDon[0] %>
                             <br/>
-                            <p class="text-left"><b>Tiền khám:</b> {{number_format($PKB->hoadon->TienKham)}} VND</p>
-                            <p class="text-left"><b>Tiền thuốc:</b> {{number_format($PKB->hoadon->TienThuoc)}} VND</p>
+                            <p class="text-left"><b>Tiền khám:</b> <%= TienKham %> VND</p>
+                            <p class="text-left"><b>Tiền thuốc:</b> <%= TienThuoc %> VND</p>
                             <hr>
-                            <h3 class="text-right">{{number_format($PKB->hoadon->TienThuoc + $PKB->hoadon->TienKham)}} VND</h3>
+                            <h3 class="text-right"><%= TienKham + TienThuoc %> VND</h3>
                         </div>
                     </div>
                     <hr>

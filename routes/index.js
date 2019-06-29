@@ -7,6 +7,9 @@ var LoaiBenhController = require('../controllers/LoaiBenhController')
 var ThuocController = require('../controllers/ThuocController')
 var DonViController = require('../controllers/DonViController')
 var CachDungController = require('../controllers/CachDungController')
+var BaoCaoDoanhThuController = require('../controllers/BaoCaoDoanhThuController')
+var BaoCaoSuDungThuocController = require('../controllers/BaoCaoSuDungThuocController')
+var QuyDinhController = require('../controllers/QuyDinhController')
 
 var db = require('../models/dbconnection');
 var bodyParser = require('body-parser').urlencoded({
@@ -62,14 +65,20 @@ router.get('/benhnhan/tracuu', async function (req, res, next) {
   });
 });
 
+//Tra Cuu Benh Nhan
+router.get('/benhnhan/tracuuajax', async function (req, res, next) {
+  var TraCuu = await BenhNhanController.getTraCuuBenhNhan(req, res);
+  setTimeout(function(){ res.send(TraCuu); }, 1000);
+});
+
 //=========================PhieuKhamBenh=============================//
 
 //Danh Sach Phieu Kham Benh
 router.get('/phieukhambenh', async function (req, res, next) {
-  var PhieuKhamBenh = await PhieuKhamBenhController.getPhieuKhamBenh()
+  var PhieuKhamBenh = await PhieuKhamBenhController.getDanhSachPhieuKhamBenh()
   // res.send(PhieuKhamBenh);
   res.render('phieukhambenh/danhsach', {
-    PhieuKhamBenh: await PhieuKhamBenhController.getPhieuKhamBenh()
+    PhieuKhamBenh: await PhieuKhamBenhController.getDanhSachPhieuKhamBenh()
   });
 });
 
@@ -90,8 +99,44 @@ router.get('/phieukhambenh/them', async function (req, res, next) {
   });
 });
 
+router.get('/phieukhambenh/them/:MaBN', async function (req, res, next) {
+  // res.send(await BenhNhanController.getDanhSachBenhNhan())
+  let DonVi = await DonViController.getDonVi()
+  let BenhNhan = await BenhNhanController.getDanhSachBenhNhan()
+  let LoaiBenh = await LoaiBenhController.getLoaiBenh()
+  let Thuoc = await ThuocController.getThuoc()
+  let CachDung = await CachDungController.getCachDung()
+  res.render('phieukhambenh/them', {
+    BenhNhan,
+    LoaiBenh,
+    DonVi,
+    Thuoc,
+    CachDung
+  });
+});
 router.post('/phieukhambenh/them', bodyParser, async function (req, res, next) {
   await PhieuKhamBenhController.postPhieuKhamBenh(req, res);
+});
+
+router.get('/phieukhambenh/chitiet/:MaPKB', async function (req, res, next) {
+  var MaPKB = req.params.MaPKB;
+  var PhieuKhamBenh = await PhieuKhamBenhController.getPhieuKhamBenh(MaPKB);
+  var ChiTietPKB = await PhieuKhamBenhController.getChiTietPKB(MaPKB);
+  var HoaDon = await PhieuKhamBenhController.getHoaDon(MaPKB);
+  res.render('phieukhambenh/chitiet', {
+    PhieuKhamBenh,
+    ChiTietPKB,
+    HoaDon
+  });
+});
+
+router.get('/phieukhambenh/danhsachkhambenh', async function (req, res, next) {
+  res.render('phieukhambenh/danhsachkhambenh')
+});
+router.get('/phieukhambenh/danhsachkhambenhajax', async function (req, res, next) {
+  var DanhSach = await PhieuKhamBenhController.getDanhSachKhamBenhAjax(req, res);  
+  console.log(DanhSach);
+  setTimeout(function(){ res.send(DanhSach); }, 1000);
 });
 
 //=========================LoaiBenh=============================//
@@ -108,7 +153,6 @@ router.post('/loaibenh/them', bodyParser, async function (req, res, next) {
 
 router.get('/loaibenh/xoa/:MaLoaiBenh', async function (req, res, next) {
   await LoaiBenhController.getXoaLoaiBenh(req, res);
-  // res.send('Da Xoa');
 });
 
 router.get('/loaibenh/sua/:MaLoaiBenh', async function (req, res, next) {
@@ -218,6 +262,37 @@ router.get('/cachdung/sua/:MaCachDung', async function (req, res, next) {
 
 router.post('/cachdung/sua/:MaCachDung', bodyParser, async function (req, res, next) {
   await CachDungController.postSuaCachDung(req, res);
+
+});
+
+//=========================BaoCaoDoanhThu=============================//
+router.get('/baocaodoanhthu', async function (req, res, next) {
+  res.render('baocaodoanhthu/baocaodoanhthu');
+});
+
+router.get('/baocaodoanhthuajax', async function (req, res, next) {
+  var BaoCao = await BaoCaoDoanhThuController.getBaoCaoDoanhThu(req, res);
+  res.send(BaoCao);
+});
+
+//=========================BaoCaoSuDungThuoc=============================//
+router.get('/baocaosudungthuoc', async function (req, res, next) {
+  res.render('baocaosudungthuoc/baocaosudungthuoc');
+});
+
+router.get('/baocaosudungthuocajax', async function (req, res, next) {
+  var BaoCao = await BaoCaoSuDungThuocController.getBaoCaoSuDungThuoc(req, res);
+  res.send(BaoCao);
+});
+
+//=========================QuyDinh=============================//
+router.get('/quydinh', async function (req, res, next) {
+  var QuyDinh = await QuyDinhController.getQuyDinh(req, res);
+  res.render('quydinh/quydinh', { QuyDinh });
+});
+router.post('/quydinh', async function (req, res, next) {
+  // console.log('DDa Nhan')
+  await QuyDinhController.postQuyDinh(req, res);
 });
 
 module.exports = router;

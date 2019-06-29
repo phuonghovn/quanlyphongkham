@@ -54,14 +54,14 @@
 
                             <div class="form-group">
                                 <label class="control-label">Họ & tên bệnh nhân</label>
-                                <input name="hoten" type="text" class="form-control" value="{{old('hoten')}}"
+                                <input name="hoten" type="text" class="form-control" value=""
                                        placeholder="Họ & tên">
                             </div>
 
 
                             <div class="form-group">
                                 <label class="control-label">Triệu chứng</label>
-                                <input name="trieuchung" type="text" class="form-control" value="{{old('trieuchung')}}"
+                                <input name="trieuchung" type="text" class="form-control" value=""
                                        placeholder="Triệu chứng">
                             </div>
 
@@ -161,11 +161,10 @@
             }
             else {
                 $.ajax({
-                    url: "{{route('ajax-tracuu-benhnhan.get')}}",
+                    url: "/benhnhan/tracuuajax",
                     type: "GET",
                     async: true,
                     data: {
-//                        "_token": token,
                         "hoten": hoten,
                         "ngay" : ngay,
                         "trieuchung" : trieuchung,

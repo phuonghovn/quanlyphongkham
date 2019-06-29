@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql');
 var engine = require('ejs-locals');
-
+var moment = require('moment');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -33,9 +33,13 @@ app.use('/cachdung/sua', express.static(path.join(__dirname, 'public')));
 app.use('/thuoc', express.static(path.join(__dirname, 'public')));
 app.use('/thuoc/sua', express.static(path.join(__dirname, 'public')));
 app.use('/phieukhambenh', express.static(path.join(__dirname, 'public')));
+app.use('/phieukhambenh/chitiet', express.static(path.join(__dirname, 'public')));
+app.use('/phieukhambenh/them', express.static(path.join(__dirname, 'public')));
 
 
-
+var shortDateFormat = "ddd @ h:mmA"; // this is just an example of storing a date format once so you can change it in one place and have it propagate
+app.locals.moment = moment; // this makes moment available as a variable in every EJS page
+app.locals.shortDateFormat = shortDateFormat;
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

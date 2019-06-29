@@ -62,7 +62,7 @@
                                 <% const {MaLoaiBenh, TenLoaiBenh, created_at} = item %>
                         <tr>
                             <td><%= index+1 %></td>
-                            <td title=""><%= created_at.toLocaleDateString()%></td>
+                            <td title=""><%= moment().format('MM/DD/YYYY')%></td>
                             <td title=""><%= TenLoaiBenh%></td>
                             <td>
                                 <a href="/loaibenh/sua/<%= MaLoaiBenh %>" class="btn btn-icon waves-effect waves-light btn-warning" title="Sửa"> <i class="fa fa-wrench"></i></a>

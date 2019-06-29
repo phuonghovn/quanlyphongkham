@@ -1,13 +1,16 @@
 var db = require('../models/dbconnection');
 var mysql = require('mysql');
 
+
 //create class
 var PhieuKhamBenhController = {
-    getPhieuKhamBenh: function (req, res) {
+    getDanhSachPhieuKhamBenh: function (req, res) {
         return new Promise((resolve, reject) => {
-            var BenhNhan = db.query(`SELECT NgayKham, pk.MaBN, HoTen, TrieuChung, pk.MaLoaiBenh, TenLoaiBenh
+            var BenhNhan = db.query(`SELECT pk.MaPKB, NgayKham, pk.MaBN, HoTen, TrieuChung, pk.MaLoaiBenh, TenLoaiBenh
             from phieukham pk, benhnhan bn, loaibenh lb
-            where pk.MaBN = bn.MaBN AND pk.MaLoaiBenh = lb.MaLoaiBenh`, function (error, results) {
+            where pk.MaBN = bn.MaBN AND pk.MaLoaiBenh = lb.MaLoaiBenh
+            ORDER BY pk.NgayKham DESC
+            `, function (error, results) {
                 //if error, print blank results
                 if (error) {
                     res.redirect('/');
@@ -49,11 +52,13 @@ var PhieuKhamBenhController = {
 
             function postPhieuKham() {
                 return new Promise((resolve, reject) => {
-                    var query = `INSERT INTO phieukham (NgayKham, MaBN, TrieuChung, MaLoaiBenh) VALUES (${mysql.escape(req.body.ngaykham)}, 
+                    var query = `INSERT INTO phieukham (NgayKham, MaBN, TrieuChung, MaLoaiBenh, created_at, updated_at) 
+                    VALUES (NOW(), 
                     ${mysql.escape(req.body.mabn)}, 
                     ${mysql.escape(req.body.trieuchung)}, 
-                    ${mysql.escape(req.body.loaibenh)})`
-
+                    ${mysql.escape(req.body.loaibenh)},
+                    NOW(),
+                    NOW())`
                     var BenhNhan = db.query(query, function (error, results) {
                         //if error, print blank results
                         if (error) {}
@@ -144,6 +149,85 @@ var PhieuKhamBenhController = {
             await postHoaDon(MaPKB, TienKham, TienThuoc);
             res.redirect('/phieukhambenh');
         })
-    }
+    },
+    getPhieuKhamBenh: function (MaPKB) {
+        return new Promise((resolve, reject) => {
+            var BenhNhan = db.query(`SELECT NgayKham, pk.MaBN, HoTen, TrieuChung, pk.MaLoaiBenh, TenLoaiBenh
+            from phieukham pk, benhnhan bn, loaibenh lb
+            where pk.MaBN = bn.MaBN AND pk.MaLoaiBenh = lb.MaLoaiBenh AND MaPKB=${MaPKB}`, function (error, results) {
+                //if error, print blank results
+                if (error) {
+                    res.redirect('/');
+                }
+                // console.log(results);
+                // res.render('benhnhan/danhsach', { BenhNhan: results })
+                resolve(results);
+            });
+        })
+    },
+    getChiTietPKB: function (MaPKB){
+        return new Promise((resolve, reject) => {
+            var ChiTietPKB = db.query(`SELECT th.TenThuoc, dv.TenDonVi, ct.SoLuong, cd.CachDung, ct.DonGia, ct.ThanhTien
+            from thuoc th, cachdung cd, donvi dv, chitietphieukham ct
+            where ct.MaPKB=${MaPKB} AND ct.MaThuoc=th.MaThuoc AND th.MaDonVi=dv.MaDonVi AND th.MaCachDung=cd.MaCachDung`, function (error, results) {
+                //if error, print blank results
+                if (error) {
+                    res.redirect('/');
+                }
+                // console.log(results);
+                resolve(results);
+            });
+        })
+    },
+    getHoaDon: function (MaPKB) {
+        return new Promise((resolve, reject) => {
+            var query = `SELECT * from hoadon where MaPKB=${MaPKB}`;
+            db.query(query, function (error, results) {
+                //if error, print blank results
+                if (error) {
+                    res.redirect('/phieukhambenh');
+                }
+                resolve(results);                
+            });
+        })
+    },
+    getDanhSachKhamBenhAjax: function (req, res) {
+        return new Promise((resolve, reject) => {
+            // console.log(req.query);
+            var query = `SELECT pk.MaPKB, bn.HoTen, bn.GioiTinh, bn.NamSinh, bn.DiaChi
+            FROM phieukham pk, benhnhan bn
+            WHERE   pk.MaBN = bn.MaBN AND
+                    pk.ngaykham = ${mysql.escape(req.query.key)}`
+            // console.log(query);
+            db.query(query, function (error, results) {
+                //if error, print blank results
+                if (error) {
+                    res.redirect('/phieukhambenh');
+                }
+                if (results.length == 0) {
+                    resolve("<tr><td colspan='6'>Không tìm thấy bệnh nhân</td></tr>")
+                } else {
+                    kq = '';
+                    results.forEach((element, index) => {
+                    kq += 
+                    `<tr>
+                     <td>${index + 1}</td>
+                     <td>${element.HoTen}</td>
+                    ${(element.GioiTinh == 1) ? '<td>Nữ</td>' : (element.GioiTinh == 2) ? '<td>Nam</td>' : '<td>Khác</td>'}
+                     <td>${element.NamSinh}</td>
+                     <td>${element.NamSinh}</td>
+                     <td><a href='/phieukhambenh/chitiet/${element.MaPKB}' target='_blank'
+                                       class='btn btn-icon waves-effect waves-light btn-success' title='Chi tiết đơn thuốc'>
+                                        Đơn thuốc</a> . </td>;
+                     </tr>`
+                    });
+                    resolve(kq);
+                }
+                // console.log(results);
+            });
+
+        })
+    },
 };
+
 module.exports = PhieuKhamBenhController;
