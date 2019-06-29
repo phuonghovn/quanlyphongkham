@@ -1,14 +1,14 @@
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-    // host: "46.101.6.7",
-    // user: "phuongho",
-    // password: "054rzF4iRi",
-    // database: "quanlyphongkham"
-    host: "192.168.64.2",
-    user: "phuongho",
-    password: "",
+    host: "us-cdbr-iron-east-02.cleardb.net",
+    user: "be76b258261fc4",
+    password: "8aa2fa47",
     database: "quanlyphongkham"
+    // host: "192.168.64.2",
+    // user: "phuongho",
+    // password: "",
+    // database: "quanlyphongkham"
   });
   
   connection.connect(function(err) {
