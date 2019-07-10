@@ -34,7 +34,7 @@
 
 </head>
 
-<body class="fixed-left">
+<body onload="getSoBenhNhanConLai()" class="fixed-left">
 
 <!-- Begin page -->
 <div id="wrapper">
@@ -128,14 +128,22 @@
 <script src="assets/plugins/jquery-knob/jquery.knob.js"></script>
 
 
-<!-- <script type="text/javascript">
-    TableManageButtons.init();
+
+<script >
+    function getSoBenhNhanConLai() {
+        console.log('Da Gui Request');
+            $.ajax({
+                url: "/sobenhnhanconlai",
+                type: "GET",
+                async: true,
+                data: {
+                },
+                success: function (data) {
+                    console.log(data);
+                    $("#sobenhnhanconlai").html(data);
+                }
+            });
+        }
 </script>
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-        $(".knob").knob();
-    });
-</script>
-@yield('script') -->
 </body>
 </html>

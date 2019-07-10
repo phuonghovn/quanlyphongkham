@@ -19,24 +19,8 @@
                 </div>
 
                 <ul class="nav navbar-nav hidden-xs">
-                    <li><a class="waves-effect waves-light">Số bệnh nhân có thể khám còn lại là: <strong
-                                    style=" font-size: 1.25em">40</strong></a></li>
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right pull-right">
-                    <li class="dropdown top-menu-item-xs">
-                        <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown"
-                           aria-expanded="true"><img src="assets/images/avt.png" alt="user-img" class="img-circle"> </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{route('hoso.get')}}"><i class="ti-user m-r-10 text-custom"></i> Hồ sơ </a>
-                            </li>
-                            <li><a href="{{route('doimatkhau.get')}}"><i class="ti-settings m-r-10 text-custom"></i> Đổi
-                                    mật khẩu </a></li>
-                            <li class="divider"></li>
-                            <li><a href="{{route('dangxuat.get')}}"><i class="ti-power-off m-r-10 text-danger"></i> Đăng
-                                    xuất </a></li>
-                        </ul>
-                    </li>
+                    <li><a class="waves-effect waves-light">Số bệnh nhân có thể khám còn lại là: 
+                        <strong  id="sobenhnhanconlai" style=" font-size: 1.25em"></strong></a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->

@@ -12,7 +12,7 @@ $( document ).ready(function() {
             width: $('#sparkline1').width(),
             height: '165',
             chartRangeMax: 50,
-            lineColor: '#7e57c2',
+            lineColor: '#2ADCDF',
             fillColor: 'rgba(126, 87, 194, 0.3)',
             highlightLineColor: 'rgba(0,0,0,.1)',
             highlightSpotColor: 'rgba(0,0,0,.2)',
@@ -42,7 +42,7 @@ $( document ).ready(function() {
             type: 'pie',
             width: '165',
             height: '165',
-            sliceColors: ['#7e57c2', '#34d3eb', "#ebeff2"]
+            sliceColors: ['#2ADCDF', '#34d3eb', "#ebeff2"]
         });
     
         $('#sparkline4').sparkline([0, 23, 43, 35, 44, 45, 56, 37, 40], {
@@ -50,7 +50,7 @@ $( document ).ready(function() {
             width: $('#sparkline1').width(),
             height: '165',
             chartRangeMax: 50,
-            lineColor: '#7e57c2',
+            lineColor: '#2ADCDF',
             fillColor: 'transparent',
             highlightLineColor: 'rgba(0,0,0,.1)',
             highlightSpotColor: 'rgba(0,0,0,.2)'
@@ -73,7 +73,7 @@ $( document ).ready(function() {
             height: '165',
             barWidth: '10',
             barSpacing: '3',
-            barColor: '#7e57c2'
+            barColor: '#2ADCDF'
         });
     
         $('#sparkline6').sparkline([3, 6, 7, 8, 6, 4, 7, 10, 12, 7, 4, 9, 12, 13, 11, 12], {
@@ -121,7 +121,7 @@ $( document ).ready(function() {
                         width: $('#sparkline1').width(),
                         height: '165',
                         chartRangeMax: 50,
-                        lineColor: '#7e57c2',
+                        lineColor: '#2ADCDF',
                         fillColor: 'rgba(126, 87, 194, 0.3)',
                         highlightLineColor: 'rgba(24,147,126,.1)',
                         highlightSpotColor: 'rgba(24,147,126,.2)',

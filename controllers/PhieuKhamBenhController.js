@@ -9,7 +9,7 @@ var PhieuKhamBenhController = {
             var BenhNhan = db.query(`SELECT pk.MaPKB, NgayKham, pk.MaBN, HoTen, TrieuChung, pk.MaLoaiBenh, TenLoaiBenh
             from phieukham pk, benhnhan bn, loaibenh lb
             where pk.MaBN = bn.MaBN AND pk.MaLoaiBenh = lb.MaLoaiBenh
-            ORDER BY pk.NgayKham DESC
+            ORDER BY pk.created_at DESC
             `, function (error, results) {
                 //if error, print blank results
                 if (error) {

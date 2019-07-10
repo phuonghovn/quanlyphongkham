@@ -7,7 +7,8 @@ var ThuocController = {
         return new Promise((resolve, reject) => {
             var query = `SELECT th.MaThuoc, th.TenThuoc, th.SoLuongConLai, th.MaDonVi, dv.TenDonVi, th.DonGia, th.MaCachDung, cd.CachDung
             FROM thuoc th, donvi dv, cachdung cd
-            WHERE th.MaDonVi = dv.MaDonVi AND th.MaCachDung = cd.MaCachDung`;
+            WHERE th.MaDonVi = dv.MaDonVi AND th.MaCachDung = cd.MaCachDung
+            ORDER BY th.TenThuoc ASC`;
             var Thuoc = db.query(query, function (error, results) {
                 //if error, print blank results
                 if (error) {
@@ -22,10 +23,13 @@ var ThuocController = {
 
     postThemThuoc: function (req, res) {
         return new Promise((resolve, reject) => {
-            var query = `INSERT INTO thuoc (TenThuoc, SoLuongConLai, MaDonVi, DonGia, MaCachDung) VALUES
-            (${mysql.escape(req.body.tenthuoc)}, ${mysql.escape(req.body.soluongnhap)}, ${mysql.escape(req.body.donvi)}, ${mysql.escape(req.body.dongia)}, ${mysql.escape(req.body.cachdung)})`
+            var query = `INSERT INTO thuoc (TenThuoc, SoLuongConLai, MaDonVi, DonGia, MaCachDung, created_at, updated_at) VALUES
+            (${mysql.escape(req.body.tenthuoc)}, ${mysql.escape(req.body.soluongnhap)}, 
+            ${mysql.escape(req.body.donvi)}, ${mysql.escape(req.body.dongia)}, ${mysql.escape(req.body.cachdung)},
+            Now(),Now())`
             var Thuoc = db.query(query, function (error, results) {
                 //if error, print blank results
+                console.log(query);
                 if (error) {
                 }
                 // console.log(results);

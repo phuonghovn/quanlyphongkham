@@ -18,15 +18,17 @@ var BaoCaoSuDungThuocController = {
                     WHERE pk.MaPKB = ct.MaPKB AND 
                             pk.NgayKham LIKE '%${req.query.key}%' 
                     GROUP BY ct.MaThuoc) AS tam2 
-            ON tam1.MaThuoc = tam2.MaThuocTam 
-            GROUP BY tam1.TenThuoc
+            ON tam1.MaThuoc = tam2.MaThuocTam
             ORDER BY tam1.MaThuoc`;
             // console.log(query);
             var BaoCao = db.query(query, function (error, results) {
                 //if error, print blank results
                 if (error) {
+
                     res.redirect('/');
+                    // console.log(error.message);
                 }
+                // console.log(results);
                 if (results.length == 0) {
                     resolve("<tr><td colspan='6'>Không có dữ liệu</td></tr>")
                 } else {

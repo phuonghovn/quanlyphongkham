@@ -77,7 +77,8 @@ var BenhNhanController = {
                     bn.HoTen LIKE '%${req.query.hoten}%' AND
                     pk.NgayKham LIKE '%${req.query.ngay}%' AND
                     pk.TrieuChung LIKE '%${req.query.trieuchung}%' AND
-                    lb.TenLoaiBenh LIKE '%${req.query.loaibenh}%'`
+                    lb.MaLoaiBenh LIKE '%${req.query.loaibenh}%'`
+            // console.log(query);
             db.query(query, function (error, results) {
                 //if error, print blank results
                 if (error) {

@@ -105,12 +105,12 @@ File: Chartjs
                 {
                     data: [300, 50, 100],
                     backgroundColor: [
-                        "#7e57c2",
+                        "#2ADCDF",
                         "#34d3eb",
                         "#ebeff2"
                     ],
                     hoverBackgroundColor: [
-                        "#7e57c2",
+                        "#2ADCDF",
                         "#34d3eb",
                         "#ebeff2"
                     ],
@@ -131,12 +131,12 @@ File: Chartjs
                 {
                     data: [300, 50, 100],
                     backgroundColor: [
-                        "#7e57c2",
+                        "#2ADCDF",
                         "#34d3eb",
                         "#ebeff2"
                     ],
                     hoverBackgroundColor: [
-                        "#7e57c2",
+                        "#2ADCDF",
                         "#34d3eb",
                         "#ebeff2"
                     ],
@@ -153,10 +153,10 @@ File: Chartjs
                 {
                     label: "Sales Analytics",
                     backgroundColor: "rgba(126, 87, 194, 0.3)",
-                    borderColor: "#7e57c2",
+                    borderColor: "#2ADCDF",
                     borderWidth: 1,
                     hoverBackgroundColor: "rgba(126, 87, 194, 0.6)",
-                    hoverBorderColor: "#7e57c2",
+                    hoverBorderColor: "#2ADCDF",
                     data: [65, 59, 80, 81, 56, 55, 40,20]
                 }
             ]
@@ -202,7 +202,7 @@ File: Chartjs
                     18
                 ],
                 backgroundColor: [
-                    "#7e57c2",
+                    "#2ADCDF",
                     "#1a2942",
                     "#34d3eb",
                     "#ebeff2"

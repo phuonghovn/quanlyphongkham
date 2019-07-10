@@ -55,7 +55,7 @@
                 { y: '2014', a: 75, b: 65, c:30 },
                 { y: '2015', a: 90, b: 60, c:30 }
             ];
-        this.createAreaChart('morris-area-example', 0, 0, $areaData, 'y', ['a', 'b','c'], ['Mobiles', 'Tablets','Desktops'], ['#7e57c2', '#34d3eb', '#bbbbbb']);
+        this.createAreaChart('morris-area-example', 0, 0, $areaData, 'y', ['a', 'b','c'], ['Mobiles', 'Tablets','Desktops'], ['#2ADCDF', '#34d3eb', '#bbbbbb']);
 
         //creating bar chart
         var $barData  = [
@@ -67,7 +67,7 @@
             { y: '2014', a: 75,  b: 65 , c: 56 },
             { y: '2015', a: 100, b: 90 , c: 60 }
         ];
-        this.createBarChart('morris-bar-example', $barData, 'y', ['a', 'b', 'c'], ['Series A', 'Series B', 'Series C'], ['#7e57c2', '#34d3eb', '#ebeff2']);
+        this.createBarChart('morris-bar-example', $barData, 'y', ['a', 'b', 'c'], ['Series A', 'Series B', 'Series C'], ['#2ADCDF', '#34d3eb', '#ebeff2']);
 
     },
     //init

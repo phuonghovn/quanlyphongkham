@@ -12,7 +12,7 @@ $( document ).ready(function() {
             width: $('#sparkline1').width(),
             height: '165',
             chartRangeMax: 50,
-            lineColor: '#7e57c2',
+            lineColor: '#2ADCDF',
             fillColor: 'transparent',
             highlightLineColor: 'rgba(0,0,0,.1)',
             highlightSpotColor: 'rgba(0,0,0,.2)'
@@ -42,7 +42,7 @@ $( document ).ready(function() {
             type: 'pie',
             width: '165',
             height: '165',
-            sliceColors: ['#dcdcdc', '#34d3eb', '#7e57c2']
+            sliceColors: ['#dcdcdc', '#34d3eb', '#2ADCDF']
         });
     
 

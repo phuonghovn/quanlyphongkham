@@ -10,6 +10,7 @@ var CachDungController = require('../controllers/CachDungController')
 var BaoCaoDoanhThuController = require('../controllers/BaoCaoDoanhThuController')
 var BaoCaoSuDungThuocController = require('../controllers/BaoCaoSuDungThuocController')
 var QuyDinhController = require('../controllers/QuyDinhController')
+var TrangChuController = require('../controllers/TrangChuController')
 
 var db = require('../models/dbconnection');
 var bodyParser = require('body-parser').urlencoded({
@@ -19,9 +20,9 @@ var bodyParser = require('body-parser').urlencoded({
 
 //=========================BenhNhan=============================//
 
-router.get('/', function (req, res, next) {
-  res.redirect('/benhnhan');
-});
+// router.get('/', function (req, res, next) {
+//   res.redirect('/benhnhan');
+// });
 
 //Danh Sach Benh Nhan
 router.get('/benhnhan', async function (req, res, next) {
@@ -294,5 +295,22 @@ router.post('/quydinh', async function (req, res, next) {
   // console.log('DDa Nhan')
   await QuyDinhController.postQuyDinh(req, res);
 });
+
+//=========================TrangChu=============================//
+router.get('/', async function (req, res, next) {
+  var SoBenhNhan = await TrangChuController.getSoBenhNhanTrongThang('2019-06');
+  var SoPhieuKham = await TrangChuController.getPhieuKhamTrongThang('2019-06');  
+  var TongTienKham = await TrangChuController.getTongTienKhamTrongThang('2019-06');
+  var DoanhThu = await TrangChuController.getTongDoanhThuTrongThang('2019-06');
+  var Top3SoLan = await TrangChuController.getTop3SoLanSDTTrongThang('2019-06');
+  var Top3SoLuong = await TrangChuController.getTop3SoLuongSDTTrongThang('2019-06');
+  res.render('trangchu/trangchu', {SoBenhNhan, SoPhieuKham, TongTienKham, DoanhThu, Top3SoLan, Top3SoLuong});
+});
+router.get('/sobenhnhanconlai', async function (req, res, next) {
+  var SoBenhNhanConLai = await TrangChuController.getSoBenhNhanConLai(req, res);
+  // console.log(SoBenhNhanConLai);
+  res.send(SoBenhNhanConLai);
+});
+
 
 module.exports = router;
