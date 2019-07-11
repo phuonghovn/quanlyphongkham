@@ -144,8 +144,32 @@ var TrangChuController = {
             }
             var SoBenhNhanDaKham = await getSoBenhNhanDaKham();
             var SoBenhNhanToiDa = await getSoBenhNhanToiDa();
-            resovle(SoBenhNhanToiDa-SoBenhNhanDaKham);
+            resovle(`Số bệnh nhân có thể khám còn lại là:<strong style=" font-size: 1.25em">${SoBenhNhanToiDa-SoBenhNhanDaKham}</strong>`);
         })
-    }
+    },
+    getChart: function (month) {
+        return new Promise((resolve, reject) => {
+            var label = [];
+            for (let i = moment().format('DD')-7;i<moment().format('DD'); i++){
+                label.push(`${moment().format('MM')}-${i<10 ? '0'+i : i}`)
+            }
+            var data = [];
+            label.forEach((e,i)=>{
+                let query =`SELECT SUM(TienKham) + SUM(TienThuoc) AS DoanhThu
+                FROM hoadon
+                WHERE created_at LIKE '%${'2019-'+e}%'`
+                db.query(query, function (error, results) {
+                    //if error, print blank results
+                    if (error) {
+                        res.redirect('/');
+                    }
+                    console.log(results[0].DoanhThu == null ? 0 : results[0].DoanhThu);
+
+                    data.push(results[0].DoanhThu == null ? 0 : results[0].DoanhThu);
+                });
+            });
+            resolve({label, data});
+        })
+    },
 };
 module.exports = TrangChuController;
